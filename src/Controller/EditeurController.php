@@ -41,6 +41,7 @@ class EditeurController extends AbstractController
             );
         }
 
-        return new Response ("L'éditeur correspondant à l'id ".$id." est ".$editeur->getName());
+        return new Response
+            ("L'éditeur correspondant à l'id ".$id." est ".$editeur->getName());
     }
 }
