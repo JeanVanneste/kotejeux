@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,16 @@ class Editeur
      * @ORM\Column(type="text", nullable=true)
      */
     private $logo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Jeu", mappedBy="editeur")
+     */
+    private $jeux;
+
+    public function __construct()
+    {
+        $this->jeux = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +97,37 @@ class Editeur
     public function setLogo(?string $logo): self
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Jeu[]
+     */
+    public function getJeux(): Collection
+    {
+        return $this->jeux;
+    }
+
+    public function addJeux(Jeu $jeux): self
+    {
+        if (!$this->jeux->contains($jeux)) {
+            $this->jeux[] = $jeux;
+            $jeux->setEditeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJeux(Jeu $jeux): self
+    {
+        if ($this->jeux->contains($jeux)) {
+            $this->jeux->removeElement($jeux);
+            // set the owning side to null (unless already changed)
+            if ($jeux->getEditeur() === $this) {
+                $jeux->setEditeur(null);
+            }
+        }
 
         return $this;
     }
