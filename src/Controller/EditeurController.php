@@ -5,7 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Editeur;
+use App\Form\EditeurType;
 
 class EditeurController extends AbstractController
 {
@@ -26,6 +28,34 @@ class EditeurController extends AbstractController
         $entityManager->flush();
 
         return new Response('Saved new editeur with id : '.$editeur->getId());
+    }
+
+    /**
+    * @Route("/editeur/add", name="editeurAdd")
+    */
+    public function new(Request $request)
+    {
+        $editeur = new Editeur();
+
+        $form = $this->createForm(EditeurType::class, $editeur);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $editeur = $form->getData();
+
+            $entityManager->persist($editeur);
+            $entityManager->flush();
+
+            return new Response(
+                'Saved new editeur with id : '.$editeur->getId());
+        }
+
+        return $this->render('editeur/add.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     /**
