@@ -62,7 +62,10 @@ class EditeurController extends AbstractController
             );
         }
 
-        return new Response
-            ("L'éditeur correspondant à l'id ".$id." est ".$editeur->getName());
+        return $this->render('editeur/view.html.twig', [
+            'editeur_name' => $editeur->getName(),
+            'editeur_nationalite' => $editeur->getNationalite(),
+            'editeur_creation' => $editeur->getCreationYear(),
+        ]);
     }
 }
