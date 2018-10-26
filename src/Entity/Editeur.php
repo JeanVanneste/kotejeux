@@ -30,21 +30,15 @@ class Editeur
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    /**
-    * @Assert\NotBlank()
-    */
     private $nationalite;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    /**
-     * @Assert\NotBlank()
-     */
     private $creationYear;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
 
