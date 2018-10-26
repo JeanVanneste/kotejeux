@@ -55,13 +55,25 @@ class JeuController extends AbstractController
     public function show($id)
     {
         $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($id);
-
+        
         if (!$jeu){
             throw $this->createNotFoundException(
                 'Pas de jeu trouvé correspondant l\'id '.$id
             );
         }
 
-        return new Response ('Le jeu correspondant à l\'id '.$id.' est le jeu '.$jeu->getName());
+        $editeur = $jeu->getEditeur();
+
+        return $this->render('jeu/view.html.twig', [
+            'jeu_name' => $jeu->getName(),
+            'editeur_id' => $editeur->getId(),
+            'editeur_name' => $editeur->getName(),
+            'jeu_auteur' => $jeu->getAuteur(),
+            'jeu_category' => $jeu->getCategory(),
+            'jeu_duration' => $jeu->getGameDuration(),
+            'joueur_min' => $jeu->getPlayerMin(),
+            'joueur_max' => $jeu->getPlayerMax(),
+            'description' => $jeu->getDescription(),
+        ]);
     }
 }

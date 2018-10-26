@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kotéjeux - {{ jeu_name }}{% endblock %}
+
+{% block body %}
+
+{% block sidebar %}{% endblock %}
+<h2>{{ jeu_name }}</h2>
+
+<p>Éditeur : <a href="../editeur/{{ editeur_id }}">{{ editeur_name }}</a></p>
+<p>Auteur : {{ jeu_auteur }}</p>
+<p>Catégorie : {{ jeu_category }}</p>
+<p>Durée de jeu : {{ jeu_duration }} minutes</p>
+<p> De {{ joueur_min }} à {{ joueur_max }} joueurs</p>
+<p>{{ description }}</p>
+
+{% endblock %}
