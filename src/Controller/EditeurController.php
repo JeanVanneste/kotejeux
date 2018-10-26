@@ -16,18 +16,9 @@ class EditeurController extends AbstractController
      */
     public function index()
     {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $editeur = new Editeur();
-        $editeur->setName('asmodee');
-        $editeur->setNationalite('France');
-        $editeur->setCreationYear('1986');
-
-        $entityManager->persist($editeur);
-
-        $entityManager->flush();
-
-        return new Response('Saved new editeur with id : '.$editeur->getId());
+        return $this->render('editeur/index.html.twig', [
+            'controller_name' => 'editeurController',
+        ]);
     }
 
     /**
