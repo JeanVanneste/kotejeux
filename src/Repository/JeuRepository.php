@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Jeu;
+use App\Entity\Editeur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Editeur;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\JeuRepository")
@@ -22,7 +23,7 @@ class Jeu
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\editeur", inversedBy="jeux")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Editeur", inversedBy="jeux")
      * @ORM\JoinColumn(nullable=false)
      */
     private $editeur;
