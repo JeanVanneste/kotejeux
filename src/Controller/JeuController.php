@@ -55,7 +55,7 @@ class JeuController extends AbstractController
     public function show($id)
     {
         $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($id);
-        
+
         if (!$jeu){
             throw $this->createNotFoundException(
                 'Pas de jeu trouvé correspondant l\'id '.$id
@@ -75,5 +75,39 @@ class JeuController extends AbstractController
             'joueur_max' => $jeu->getPlayerMax(),
             'description' => $jeu->getDescription(),
         ]);
+    }
+
+    /**
+    * @Route("/jeu/{id}/update", name="jeuUpdate")
+    */
+    public function update($id, Request $request)
+    {
+        $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($id);
+
+        if (!$jeu){
+            throw $this->createNotFoundException(
+                'Pas de jeu trouvé correspondant à l\'id '.$id
+            );
+        }
+
+        $form = $this->createForm(JeuType::class, $jeu);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $jeu = $form->getData();
+
+            $entityManager->persist($jeu);
+            $entityManager->flush();
+
+            return new Response(
+                "Jeu mis à jour avec l'id ".$jeu->getId());
+        }
+
+        return $this->render('jeu/update.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 }
