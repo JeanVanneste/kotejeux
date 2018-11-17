@@ -39,8 +39,6 @@ class EditeurControllerAPI extends AbstractController
     /**
     * @Route("/api/editeur/add", name="editeurAddAPI", methods={"POST", "HEAD"})
     */
-
-
     public function add(Request $request)
     {
         $editeur = new Editeur();
@@ -60,37 +58,37 @@ class EditeurControllerAPI extends AbstractController
 
             return new Response(
                 'Saved new editeur with id : '.$editeur->getId());
-            }
-            return $this->render('editeur/add.html.twig', array(
-                'form' => $form->createView(),
-            ));
         }
+        return $this->render('editeur/add.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
-        /**
-        * @Route("/api/editeur/{id}", name="editeurShowAPI", methods={"GET", "HEAD"})
-        */
-        public function show($id)
-        {
-            $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
+    /**
+    * @Route("/api/editeur/{id}", name="editeurShowAPI", methods={"GET", "HEAD"})
+    */
 
-            if (!$editeur) {
-                throw $this->createNotFoundException(
-                    'No editeur found for id '.$id
-                );
-            }
+    public function show($id)
+    {
+        $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
 
-            $encoders = array(new JsonEncoder());
-            $normalizers = array(new ObjectNormalizer());
-            $serializer = new Serializer($normalizers, $encoders);
-
-            $jsonContent = $serializer->serialize($editeur, 'json');
-
-            $response = new JsonResponse();
-            $response->setContent($jsonContent);
-
-            return $response;
+        if (!$editeur) {
+            throw $this->createNotFoundException(
+                'No editeur found for id '.$id
+            );
         }
+
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $jsonContent = $serializer->serialize($editeur, 'json');
+
+        $response = new JsonResponse();
+        $response->setContent($jsonContent);
+
+        return $response;
+    }
 
     /**
     * @Route("/api/editeur/{id}/update", name="editeurUpdateAPI",
@@ -115,11 +113,11 @@ class EditeurControllerAPI extends AbstractController
             $entityManager->flush();
 
             return new Response(
-            'Updated editeur with id : '.$editeur->getId());
+                'Updated editeur with id : '.$editeur->getId());
+            }
+            return $this->render('editeur/update.html.twig', array(
+                'form' => $form->createView(),
+            ));
         }
-    return $this->render('editeur/update.html.twig', array(
-        'form' => $form->createView(),
-    ));
-}
 
-}
+    }
