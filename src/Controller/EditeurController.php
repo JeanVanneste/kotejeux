@@ -24,7 +24,7 @@ class EditeurController extends AbstractController
     /**
     * @Route("/editeur/add", name="editeurAdd")
     */
-    public function new(Request $request)
+    public function add(Request $request)
     {
         $editeur = new Editeur();
 

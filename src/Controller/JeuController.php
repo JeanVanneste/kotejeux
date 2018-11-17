@@ -25,7 +25,7 @@ class JeuController extends AbstractController
     /**
     * @Route("/jeu/add", name="jeuAdd")
     */
-    public function new(Request $request)
+    public function add(Request $request)
     {
         $jeu = new Jeu();
         $form = $this->createForm(JeuType::class, $jeu);

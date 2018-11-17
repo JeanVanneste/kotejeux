@@ -21,6 +21,8 @@ class EditeurControllerAPI extends AbstractController
     */
     public function index()
     {
+        // TODO réparer fonction
+
         $encoders = array(new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
         $serializer = new Serializer($normalizers, $encoders);
@@ -39,7 +41,7 @@ class EditeurControllerAPI extends AbstractController
     */
 
 
-    public function new(Request $request)
+    public function add(Request $request)
     {
         $editeur = new Editeur();
 
