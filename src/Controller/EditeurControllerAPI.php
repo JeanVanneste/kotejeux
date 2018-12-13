@@ -36,6 +36,8 @@ class EditeurControllerAPI extends AbstractController
         return $response;
     }
 
+
+    // TODO
     /**
     * @Route("/api/editeur/add", name="editeurAddAPI", methods={"POST", "HEAD"})
     */
@@ -95,6 +97,7 @@ class EditeurControllerAPI extends AbstractController
         return $response;
     }
 
+    // TODO
     /**
     * @Route("/api/editeur/{id}/update", name="editeurUpdateAPI",
     *    methods={"PUT", "HEAD"})
