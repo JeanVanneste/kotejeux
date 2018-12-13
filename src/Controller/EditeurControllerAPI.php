@@ -78,9 +78,14 @@ class EditeurControllerAPI extends AbstractController
             );
         }
 
-        $encoders = array(new JsonEncoder());
-        $normalizers = array(new ObjectNormalizer());
-        $serializer = new Serializer($normalizers, $encoders);
+        $encoders = new JsonEncoder();
+        $normalizers = new ObjectNormalizer();
+
+        $normalizers->setCircularReferenceHandler(function ($object, string $format = null, array $context = array()){
+            return $object->getName();
+        });
+
+        $serializer = new Serializer(array($normalizers), array($encoders));
 
         $jsonContent = $serializer->serialize($editeur, 'json');
 
