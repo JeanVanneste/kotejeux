@@ -49,10 +49,8 @@ class EditeurControllerAPI extends AbstractController
         $nationalite = $request->request->get('nationalite');
         $creationYear = $request->request->get('creationYear');
 
-        /*
         if  ($name != null && $nationalite != null && $creationYear != null)
         {
-        */
             $editeur = new Editeur();
             $editeur->setName($name);
             $editeur->setNationalite($nationalite);
@@ -66,7 +64,6 @@ class EditeurControllerAPI extends AbstractController
             $response->setContent("Accepted");
 
             return $response;
-            /*
         }
         else
         {
@@ -75,7 +72,6 @@ class EditeurControllerAPI extends AbstractController
 
             return $response;
         }
-        */
 
         /*
         $response = new Response();
