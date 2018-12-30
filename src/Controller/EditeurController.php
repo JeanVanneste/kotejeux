@@ -49,51 +49,51 @@ class EditeurController extends AbstractController
             ));
         }
 
-        /**
-        * @Route("/editeur/{id}", name="editeurShow")
-        */
-        public function show($id)
-        {
-            $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
+    /**
+    * @Route("/editeur/{id}", name="editeurShow")
+    */
+    public function show($id)
+    {
+        $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
 
-            if (!$editeur) {
-                throw $this->createNotFoundException(
-                    'No editeur found for id '.$id
-                );
-            }
-
-            return $this->render('editeur/view.html.twig', [
-                'editeur_name' => $editeur->getName(),
-                'editeur_nationalite' => $editeur->getNationalite(),
-                'editeur_creation' => $editeur->getCreationYear(),
-            ]);
+        if (!$editeur) {
+            throw $this->createNotFoundException(
+                'No editeur found for id '.$id
+            );
         }
 
-        /**
-        * @Route("/editeur/{id}/update", name="editeurUpdate")
-        */
-        public function update($id, Request $request)
-        {
-            $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
-
-            $form = $this->createForm(EditeurType::class, $editeur);
-
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid())
-            {
-                $entityManager = $this->getDoctrine()->getManager();
-
-                $editeur = $form->getData();
-
-                $entityManager->persist($editeur);
-                $entityManager->flush();
-
-                return new Response(
-                    'Updated editeur with id : '.$editeur->getId());
-            }
-            return $this->render('editeur/update.html.twig', array(
-                'form' => $form->createView(),
-            ));
-        }
+        return $this->render('editeur/view.html.twig', [
+            'editeur_name' => $editeur->getName(),
+            'editeur_nationalite' => $editeur->getNationalite(),
+            'editeur_creation' => $editeur->getCreationYear(),
+        ]);
     }
+
+    /**
+    * @Route("/editeur/{id}/update", name="editeurUpdate")
+    */
+    public function update($id, Request $request)
+    {
+        $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
+
+        $form = $this->createForm(EditeurType::class, $editeur);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $editeur = $form->getData();
+
+            $entityManager->persist($editeur);
+            $entityManager->flush();
+
+            return new Response(
+                'Updated editeur with id : '.$editeur->getId());
+        }
+        return $this->render('editeur/update.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+}
