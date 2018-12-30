@@ -37,33 +37,52 @@ class EditeurControllerAPI extends AbstractController
     }
 
 
-    // TODO
+    // TODO : gestion d'erreurs + crea
     /**
     * @Route("/api/editeur/add", name="editeurAddAPI", methods={"POST", "HEAD"})
     */
     public function add(Request $request)
     {
-        $editeur = new Editeur();
+        $request = Request::createFromGlobals();
 
-        $form = $this->createForm(EditeurType::class, $editeur);
+        $name = $request->request->get('name');
+        $nationalite = $request->request->get('nationalite');
+        $creationYear = $request->request->get('creationYear');
 
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())
+        /*
+        if  ($name != null && $nationalite != null && $creationYear != null)
         {
+        */
+            $editeur = new Editeur();
+            $editeur->setName($name);
+            $editeur->setNationalite($nationalite);
+            $editeur->setCreationYear($creationYear);
+
             $entityManager = $this->getDoctrine()->getManager();
-
-            $editeur = $form->getData();
-
             $entityManager->persist($editeur);
             $entityManager->flush();
 
-            return new Response(
-                'Saved new editeur with id : '.$editeur->getId());
+            $response = new Response();
+            $response->setContent("Accepted");
+
+            return $response;
+            /*
         }
-        return $this->render('editeur/add.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        else
+        {
+            $response = new Response();
+            $response->setContent("Invalid request");
+
+            return $response;
+        }
+        */
+
+        /*
+        $response = new Response();
+        $response->setContent($name.$nationalite.$fondationYear);
+
+        return $response;
+        */
     }
 
     /**
