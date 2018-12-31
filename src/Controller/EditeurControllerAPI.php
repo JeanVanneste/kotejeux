@@ -61,7 +61,7 @@ class EditeurControllerAPI extends AbstractController
             $entityManager->flush();
 
             $response = new Response();
-            $response->setContent("Accepted");
+            $response->setStatusCode(Response::HTTP_CREATED);
 
             return $response;
         }
@@ -69,6 +69,7 @@ class EditeurControllerAPI extends AbstractController
         {
             $response = new Response();
             $response->setContent("Invalid request");
+            $response->setStatusCode(Response::HTTP_BAD_REQUEST);
 
             return $response;
         }
