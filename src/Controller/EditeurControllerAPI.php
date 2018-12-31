@@ -73,13 +73,6 @@ class EditeurControllerAPI extends AbstractController
 
             return $response;
         }
-
-        /*
-        $response = new Response();
-        $response->setContent($name.$nationalite.$fondationYear);
-
-        return $response;
-        */
     }
 
     /**
