@@ -104,7 +104,7 @@ class EditeurControllerAPI extends AbstractController
         return $response;
     }
 
-    // TODO
+    // TODO : Change POST to PUT 
     /**
     * @Route("/api/editeur/{id}/update", name="editeurUpdateAPI", methods={"POST", "HEAD"})
     */
