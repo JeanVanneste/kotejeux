@@ -12,7 +12,6 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 use App\Entity\Editeur;
-use App\Form\EditeurType;
 
 class EditeurControllerAPI extends AbstractController
 {
