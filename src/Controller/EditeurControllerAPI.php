@@ -36,8 +36,6 @@ class EditeurControllerAPI extends AbstractController
         return $response;
     }
 
-
-    // TODO : gestion d'erreurs + crea
     /**
     * @Route("/api/editeur/add", name="editeurAddAPI", methods={"POST", "HEAD"})
     */
@@ -108,33 +106,49 @@ class EditeurControllerAPI extends AbstractController
 
     // TODO
     /**
-    * @Route("/api/editeur/{id}/update", name="editeurUpdateAPI",
-    *    methods={"PUT", "HEAD"})
+    * @Route("/api/editeur/{id}/update", name="editeurUpdateAPI", methods={"POST", "HEAD"})
     */
 
     public function update($id, Request $request)
     {
+        $request = Request::createFromGlobals();
+        $response = new Response();
+
         $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
 
-        $form = $this->createForm(EditeurType::class, $editeur);
+        $name = $request->request->get('name');
+        $nationalite = $request->request->get('nationalite');
+        $creationYear = $request->request->get('creationYear');
+        $flag = FALSE;
 
-        $form->handleRequest($request);
+        if ($name != null) {
+            $editeur->setName($name);
+            $flag = TRUE;
+        }
+        if ($nationalite != null) {
+            $editeur->setNationalite($nationalite);
+            $flag = TRUE;
+        }
+        if ($creationYear != null) {
+            $editeur->setCreationYear($creationYear);
+            $flag = TRUE;
+        }
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($flag) {
             $entityManager = $this->getDoctrine()->getManager();
-
-            $editeur = $form->getData();
 
             $entityManager->persist($editeur);
             $entityManager->flush();
 
-            return new Response(
-                'Updated editeur with id : '.$editeur->getId());
-            }
-            return $this->render('editeur/update.html.twig', array(
-                'form' => $form->createView(),
-            ));
+            $response->setStatusCode(Response::HTTP_ACCEPTED);
+
+        }
+        else {
+            $response->setStatusCode(Response::HTTP_BAD_REQUEST);
         }
 
+        $response->setContent("Request sent");
+        return $response;
+
     }
+}
