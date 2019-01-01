@@ -104,7 +104,7 @@ class EditeurControllerAPI extends AbstractController
         return $response;
     }
 
-    // TODO : Change POST to PUT 
+    // TODO : Change POST to PUT
     /**
     * @Route("/api/editeur/{id}/update", name="editeurUpdateAPI", methods={"POST", "HEAD"})
     */
@@ -119,22 +119,22 @@ class EditeurControllerAPI extends AbstractController
         $name = $request->request->get('name');
         $nationalite = $request->request->get('nationalite');
         $creationYear = $request->request->get('creationYear');
-        $flag = FALSE;
+        $isCorrect = FALSE;
 
         if ($name != null) {
             $editeur->setName($name);
-            $flag = TRUE;
+            $isCorrect = TRUE;
         }
         if ($nationalite != null) {
             $editeur->setNationalite($nationalite);
-            $flag = TRUE;
+            $isCorrect = TRUE;
         }
         if ($creationYear != null) {
             $editeur->setCreationYear($creationYear);
-            $flag = TRUE;
+            $isCorrect = TRUE;
         }
 
-        if ($flag) {
+        if ($isCorrect) {
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->persist($editeur);
