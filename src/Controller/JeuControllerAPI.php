@@ -174,7 +174,6 @@ class JeuControllerAPI extends AbstractController
         if ($isCorrect) {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->persist($jeu);
             $entityManager->flush();
 
             $response->setStatusCode(Response::HTTP_ACCEPTED);

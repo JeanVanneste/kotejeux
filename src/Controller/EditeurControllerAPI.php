@@ -136,7 +136,6 @@ class EditeurControllerAPI extends AbstractController
         if ($isCorrect) {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->persist($editeur);
             $entityManager->flush();
 
             $response->setStatusCode(Response::HTTP_ACCEPTED);
