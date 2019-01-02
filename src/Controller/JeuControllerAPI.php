@@ -188,4 +188,23 @@ class JeuControllerAPI extends AbstractController
         return $response;
 
     }
+
+    /**
+     * @Route("/api/jeu/{id}/delete", name="jeuDeleteAPI", methods={"DELETE", "HEAD"})
+    */
+
+    public function delete($id)
+    {
+        $response = new Response();
+
+        $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->remove($jeu);
+        $entityManager->flush();
+
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->setContent("Jeu ".$id." supprimé");
+        return $response;
+    }
 }
