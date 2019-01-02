@@ -90,9 +90,9 @@ class JeuControllerAPI extends AbstractController
 
     public function show($id)
     {
-        $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
+        $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($id);
 
-        if (!$editeur) {
+        if (!$jeu) {
             throw $this->createNotFoundException(
                 'No editeur found for id '.$id
             );
@@ -107,7 +107,7 @@ class JeuControllerAPI extends AbstractController
 
         $serializer = new Serializer(array($normalizers), array($encoders));
 
-        $jsonContent = $serializer->serialize($editeur, 'json');
+        $jsonContent = $serializer->serialize($jeu, 'json');
 
         $response = new JsonResponse();
         $response->setContent($jsonContent);
