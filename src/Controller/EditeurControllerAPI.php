@@ -148,6 +148,24 @@ class EditeurControllerAPI extends AbstractController
 
         $response->setContent("Request sent");
         return $response;
+    }
 
+    /**
+     * @Route("/api/editeur/{id}/delete", name="editeurDeleteAPI", methods={"DELETE", "HEAD"})
+    */
+
+    public function delete($id)
+    {
+        $response = new Response();
+
+        $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->remove($editeur);
+        $entityManager->flush();
+
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->setContent("Editeur ".$id." supprimé");
+        return $response;
     }
 }
