@@ -125,30 +125,56 @@ class JeuControllerAPI extends AbstractController
         $request = Request::createFromGlobals();
         $response = new Response();
 
-        $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
+        $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($id);
 
-        $name = $request->request->get('name');
-        $nationalite = $request->request->get('nationalite');
-        $creationYear = $request->request->get('creationYear');
+        $name = $request->request->get('name', $default= NULL);
+        $editeurId = $request->request->get('editeurId', $default= NULL);
+        $auteur = $request->request->get('auteur', $default= NULL);
+        $category = $request->request->get('category', $default= NULL);
+        $gameDuration = $request->request->get('gameDuration', $default= NULL);
+        $playerMin = $request->request->get('playerMin', $default= NULL);
+        $playerMax = $request->request->get('playerMax', $default= NULL);
+        $description = $request->request->get('description', $default= NULL);
+
         $isCorrect = FALSE;
 
         if ($name != null) {
-            $editeur->setName($name);
+            $jeu->setName($name);
             $isCorrect = TRUE;
         }
-        if ($nationalite != null) {
-            $editeur->setNationalite($nationalite);
+        if ($editeurId != null) {
+            $jeu->setEditeur($editeurId);
             $isCorrect = TRUE;
         }
-        if ($creationYear != null) {
-            $editeur->setCreationYear($creationYear);
+        if ($auteur != null) {
+            $jeu->setAuteur($auteur);
+            $isCorrect = TRUE;
+        }
+        if ($category) {
+            $jeu->setCategory($category);
+            $isCorrect = TRUE;
+        }
+        if ($gameDuration) {
+            $jeu->setGameDuration($gameDuration);
+            $isCorrect = TRUE;
+        }
+        if ($playerMin) {
+            $jeu->setPlayerMin($playerMin);
+            $isCorrect = TRUE;
+        }
+        if ($playerMax) {
+            $jeu->setPlayerMax($playerMax);
+            $isCorrect = TRUE;
+        }
+        if ($description) {
+            $jeu->setDescription($description);
             $isCorrect = TRUE;
         }
 
         if ($isCorrect) {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->persist($editeur);
+            $entityManager->persist($jeu);
             $entityManager->flush();
 
             $response->setStatusCode(Response::HTTP_ACCEPTED);
