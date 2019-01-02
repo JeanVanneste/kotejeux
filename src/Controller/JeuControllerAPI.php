@@ -52,10 +52,8 @@ class JeuControllerAPI extends AbstractController
         $playerMax = $request->request->get('playerMax', $default= NULL);
         $description = $request->request->get('description', $default= NULL);
 
-        /*
         if  ($name && $editeurId && $auteur && $category && $gameDuration && $playerMin && $playerMax && $description)
         {
-        */
             $jeu = new Jeu();
             $jeu->setName($name);
             $jeu->setAuteur($auteur);
@@ -76,7 +74,6 @@ class JeuControllerAPI extends AbstractController
             $response->setStatusCode(Response::HTTP_CREATED);
 
             return $response;
-            /*
         }
         else {
             $response = new Response();
@@ -85,7 +82,6 @@ class JeuControllerAPI extends AbstractController
 
             return $response;
         }
-        */
     }
 
     /**
