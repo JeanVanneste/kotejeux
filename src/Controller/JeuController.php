@@ -66,6 +66,7 @@ class JeuController extends AbstractController
         $editeur = $jeu->getEditeur();
 
         return $this->render('jeu/view.html.twig', [
+            'jeu_id' => $jeu->getId(),
             'jeu_name' => $jeu->getName(),
             'editeur_id' => $editeur->getId(),
             'editeur_name' => $editeur->getName(),

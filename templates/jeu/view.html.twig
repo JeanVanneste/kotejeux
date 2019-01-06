@@ -6,12 +6,14 @@
 
 {% block sidebar %}{% endblock %}
 <h2>{{ jeu_name }}</h2>
-
-<p>Éditeur : <a href="../editeur/{{ editeur_id }}">{{ editeur_name }}</a></p>
-<p>Auteur : {{ jeu_auteur }}</p>
-<p>Catégorie : {{ jeu_category }}</p>
-<p>Durée de jeu : {{ jeu_duration }} minutes</p>
-<p> De {{ joueur_min }} à {{ joueur_max }} joueurs</p>
-<p>{{ description }}</p>
-
+<div>
+    <p>Éditeur : <a href="../editeur/{{ editeur_id }}">{{ editeur_name }}</a></p>
+    <p>Auteur : {{ jeu_auteur }}</p>
+    <p>Catégorie : {{ jeu_category }}</p>
+    <p>Durée de jeu : {{ jeu_duration }} minutes</p>
+    <p> De {{ joueur_min }} à {{ joueur_max }} joueurs</p>
+    <p>{{ description }}</p>
+</div>
+<a href="/jeu/{{ jeu_id }}/update">Modifier les informations</a>
+<a href="#">Supprimer le jeu de la base de données</a>
 {% endblock %}
