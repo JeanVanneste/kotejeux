@@ -112,4 +112,20 @@ class JeuController extends AbstractController
             'form' => $form->createView(),
         ));
     }
+
+    /**
+     * @Route("jeu/{id}/delete", name="jeuDelete")
+     */
+    public function delete($id)
+    {
+        $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->remove($jeu);
+        $entityManager->flush();
+
+        return $this->render("jeu/delete.html.twig", [
+            'jeu_name' => $jeu->getName(),
+        ]);
+    }
 }
