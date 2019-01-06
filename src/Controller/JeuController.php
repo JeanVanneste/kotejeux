@@ -38,11 +38,14 @@ class JeuController extends AbstractController
 
             $jeu = $form->getData();
 
+            $jeu_name = $jeu->getName();
+
             $entityManager->persist($jeu);
             $entityManager->flush();
 
-            return new Response(
-                "Jeu sauvegardé avec l'id ".$jeu->getId());
+            return $this->render('jeu/confirmJeu.html.twig',[
+                    'jeu_name' => $jeu_name,
+                ]);
         }
 
         return $this->render('jeu/add.html.twig', array(
@@ -104,8 +107,9 @@ class JeuController extends AbstractController
             $entityManager->persist($jeu);
             $entityManager->flush();
 
-            return new Response(
-                "Jeu mis à jour avec l'id ".$jeu->getId());
+            return $this->render('jeu/confirmJeu.html.twig',[
+                    'jeu_name' => $jeu->getName(),
+                ]);
         }
 
         return $this->render('jeu/update.html.twig', array(
