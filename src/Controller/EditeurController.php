@@ -98,4 +98,20 @@ class EditeurController extends AbstractController
             'form' => $form->createView(),
         ));
     }
+
+    /**
+     * @Route("editeur/{id}/delete", name="editeurDelete")
+     */
+    public function delete($id)
+    {
+        $editeur = $this->getDoctrine()->getRepository(Editeur::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->remove($editeur);
+        $entityManager->flush();
+
+        return $this->render("editeur/delete.html.twig", [
+            'editeur_name' => $editeur->getName(),
+        ]);
+    }
 }
