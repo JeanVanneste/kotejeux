@@ -28,7 +28,7 @@ class JeuControllerAPI extends AbstractController
         $serializer = new Serializer($normalizers, $encoders);
         $em = $this->getDoctrine()->getManager();
         $jeux = $em->getRepository(Jeu::class)->findAll();
-        $jsonContent = $serializer->serialize($editeurs, 'json');
+        $jsonContent = $serializer->serialize($jeux, 'json');
 
         $response = new JsonResponse();
         $response->setContent($jsonContent);
