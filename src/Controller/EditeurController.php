@@ -39,16 +39,19 @@ class EditeurController extends AbstractController
 
             $editeur = $form->getData();
 
+            $editeur_name = $editeur->getName();
+
             $entityManager->persist($editeur);
             $entityManager->flush();
 
-            return new Response(
-                'Saved new editeur with id : '.$editeur->getId());
-            }
-            return $this->render('editeur/add.html.twig', array(
-                'form' => $form->createView(),
-            ));
+            return $this->render('editeur/confirmEditeur.html.twig',[
+                    'editeur_name' => $editeur_name,
+                ]);
         }
+        return $this->render('editeur/add.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 
     /**
     * @Route("/editeur/{id}", name="editeurShow")
@@ -91,8 +94,9 @@ class EditeurController extends AbstractController
             $entityManager->persist($editeur);
             $entityManager->flush();
 
-            return new Response(
-                'Updated editeur with id : '.$editeur->getId());
+            return $this->render('editeur/confirmEditeur.html.twig',[
+                    'editeur_name' => $editeur.getName(),
+                ]);
         }
         return $this->render('editeur/update.html.twig', array(
             'form' => $form->createView(),
