@@ -6,8 +6,10 @@
 
 {% block sidebar %}{% endblock %}
 <h2>{{ editeur_name }}</h2>
-
+<div>
 <p>Nationalité : {{ editeur_nationalite }}</p>
 <p>Année de création : {{ editeur_creation }}</p>
-
+</div>
+<a href="/editeur/{{ editeur_id }}/update">Mettre à jour les informations</a>
+<a href="#">Supprimer le jeu de la base de données</a>
 {% endblock %}

@@ -64,6 +64,7 @@ class EditeurController extends AbstractController
         }
 
         return $this->render('editeur/view.html.twig', [
+            'editeur_id' => $editeur->getId(),
             'editeur_name' => $editeur->getName(),
             'editeur_nationalite' => $editeur->getNationalite(),
             'editeur_creation' => $editeur->getCreationYear(),
